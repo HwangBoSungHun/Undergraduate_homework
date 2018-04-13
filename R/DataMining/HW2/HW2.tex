@@ -1,0 +1,386 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={HW2.R},
+            pdfauthor={HBSH},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{HW2.R}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{HBSH}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{Wed Apr 11 10:42:36 2018}
+
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dev.off}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## null device 
+##           1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{## Part1}
+\KeywordTok{setwd}\NormalTok{(}\StringTok{"~/Desktop/3-1/DataMining/HomeWork/HW2"}\NormalTok{)}
+\NormalTok{train_data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"HWtrain.data.txt"}\NormalTok{, }\DataTypeTok{header =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{test_data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"HWtest.data.txt"}\NormalTok{, }\DataTypeTok{header =} \OtherTok{FALSE}\NormalTok{)}
+
+\NormalTok{train <-}\StringTok{ }\NormalTok{train_data[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+\NormalTok{train_y <-train_data[, }\DecValTok{1}\NormalTok{]}
+\NormalTok{test <-}\StringTok{ }\NormalTok{test_data[, }\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+
+\NormalTok{train_norm <-}\StringTok{ }\KeywordTok{scale}\NormalTok{(train)}
+
+\NormalTok{train.pr <-}\StringTok{ }\KeywordTok{princomp}\NormalTok{(train_norm)}
+\KeywordTok{summary}\NormalTok{(train.pr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Importance of components:
+##                           Comp.1    Comp.2    Comp.3     Comp.4     Comp.5
+## Standard deviation     2.1638746 1.5701494 1.2014961 0.94633050 0.93237813
+## Proportion of Variance 0.3622751 0.1907464 0.1116912 0.06928831 0.06726025
+## Cumulative Proportion  0.3622751 0.5530215 0.6647127 0.73400099 0.80126124
+##                            Comp.6     Comp.7     Comp.8     Comp.9
+## Standard deviation     0.80021359 0.74072762 0.58671307 0.53958380
+## Proportion of Variance 0.04954344 0.04245134 0.02663335 0.02252642
+## Cumulative Proportion  0.85080468 0.89325601 0.91988937 0.94241578
+##                           Comp.10    Comp.11    Comp.12     Comp.13
+## Standard deviation     0.49965421 0.47404359 0.40897252 0.320370897
+## Proportion of Variance 0.01931583 0.01738645 0.01294084 0.007941095
+## Cumulative Proportion  0.96173161 0.97911806 0.99205890 1.000000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Creating a biplot}
+\KeywordTok{biplot}\NormalTok{(train.pr)}
+
+\CommentTok{#Getting proportion of variance for a scree plot}
+\NormalTok{train.pr.var <-}\StringTok{ }\NormalTok{train.pr}\OperatorTok{$}\NormalTok{sdev}\OperatorTok{^}\DecValTok{2}
+\NormalTok{pve <-}\StringTok{ }\NormalTok{train.pr.var }\OperatorTok{/}\StringTok{ }\KeywordTok{sum}\NormalTok{(train.pr.var)}
+\KeywordTok{plot}\NormalTok{(pve, }\DataTypeTok{xlab =} \StringTok{"Principal Component"}\NormalTok{, }
+     \DataTypeTok{ylab =} \StringTok{"Portion of Variance Explaine"}\NormalTok{,}
+     \DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{type =} \StringTok{"b"}\NormalTok{)}
+
+\CommentTok{# (a) When we use the first two principle components, }
+\CommentTok{# how much information of the total do we use? }
+\KeywordTok{sprintf}\NormalTok{(}\StringTok{"%.2f%%"}\NormalTok{, }\KeywordTok{sum}\NormalTok{(pve[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{]) }\OperatorTok{*}\StringTok{ }\DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "55.30%"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# (b) Find the top-three original variables among }
+\CommentTok{# the 13 that contributed to the construction }
+\CommentTok{# of the first principle component. }
+\KeywordTok{abs}\NormalTok{(train.pr}\OperatorTok{$}\NormalTok{loadings[, }\DecValTok{1}\NormalTok{]) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{sort}\NormalTok{(}\DataTypeTok{decreasing =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{head}\NormalTok{(}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        V2       V12        V7 
+## 0.4227611 0.3934570 0.3793968
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# (c) Draw a plot of the 1st scores (on the X axis) and the 2nd scores }
+\CommentTok{# (on the Y axis) of the descriptive values in HWtrain.data.txt together}
+\CommentTok{# with the wine qualities and similarly transformed score values of the }
+\CommentTok{# five future observations in HWtest.data.txt.  Then try to predict the }
+\CommentTok{# wine quality of each of the five future observations.}
+
+\KeywordTok{plot}\NormalTok{(train.pr}\OperatorTok{$}\NormalTok{scores[,}\DecValTok{1}\NormalTok{], train.pr}\OperatorTok{$}\NormalTok{scores[,}\DecValTok{2}\NormalTok{], }\DataTypeTok{pch =} \DecValTok{20}\NormalTok{,}
+     \DataTypeTok{xlab =} \StringTok{"PC1"}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"PC2"}\NormalTok{, }\DataTypeTok{col =}\NormalTok{ train_y, }\DataTypeTok{main =} \StringTok{"Wine quality "}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(train.pr}\OperatorTok{$}\NormalTok{scores[,}\DecValTok{1}\NormalTok{], train.pr}\OperatorTok{$}\NormalTok{scores[,}\DecValTok{2}\NormalTok{], }
+     \DataTypeTok{labels =}\NormalTok{ train_y, }\DataTypeTok{pos =} \DecValTok{4}\NormalTok{, }\DataTypeTok{col =}\NormalTok{ train_y, }\DataTypeTok{cex =} \FloatTok{0.6}\NormalTok{)}
+
+\NormalTok{test_norm <-}\StringTok{ }\KeywordTok{scale}\NormalTok{(test)}
+\NormalTok{test.pr <-}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(test_norm) }\OperatorTok{%*%}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(train.pr}\OperatorTok{$}\NormalTok{loadings[, }\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{])}
+\KeywordTok{points}\NormalTok{(test.pr[,}\DecValTok{1}\NormalTok{], test.pr[,}\DecValTok{2}\NormalTok{], }\DataTypeTok{col =} \StringTok{"blue"}\NormalTok{, }\DataTypeTok{pch =}\DecValTok{15}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(test.pr[,}\DecValTok{1}\NormalTok{], test.pr[,}\DecValTok{2}\NormalTok{],  }
+     \DataTypeTok{labels =} \DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DataTypeTok{pos =} \DecValTok{4}\NormalTok{, }\DataTypeTok{col =} \StringTok{"blue"}\NormalTok{, }\DataTypeTok{cex =} \FloatTok{1.2}\NormalTok{)}
+\KeywordTok{png}\NormalTok{(}\StringTok{"predictWineQuality.png"}\NormalTok{, }\DataTypeTok{width=}\DecValTok{400}\NormalTok{, }\DataTypeTok{height=}\DecValTok{300}\NormalTok{, }\DataTypeTok{pointsize=}\DecValTok{13}\NormalTok{)}
+\KeywordTok{dev.off}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## pdf 
+##   2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{## Part2}
+\KeywordTok{library}\NormalTok{(readxl)}
+\CommentTok{#library(caret)}
+
+\NormalTok{data2 <-}\StringTok{ }\KeywordTok{read_xlsx}\NormalTok{(}\StringTok{"HW2_data_2.xlsx"}\NormalTok{)}
+\NormalTok{data2}\OperatorTok{$}\NormalTok{Y <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(data2}\OperatorTok{$}\NormalTok{Y)}
+\NormalTok{data2_X <-}\StringTok{ }\NormalTok{data2}\OperatorTok{$}\NormalTok{Xun}
+\NormalTok{data2_norm_X <-}\StringTok{ }\NormalTok{(data2_X }\OperatorTok{-}\StringTok{ }\KeywordTok{min}\NormalTok{(data2_X)) }\OperatorTok{/}\StringTok{ }\NormalTok{(}\KeywordTok{max}\NormalTok{(data2_X) }\OperatorTok{-}\StringTok{ }\KeywordTok{min}\NormalTok{(data2_X))}
+\NormalTok{data2_norm <-}\StringTok{ }\NormalTok{data2}
+\NormalTok{data2_norm}\OperatorTok{$}\NormalTok{Xun <-}\StringTok{ }\NormalTok{data2_norm_X}
+
+\NormalTok{data2_norm_}\DecValTok{1}\NormalTok{ <-}\StringTok{ }\NormalTok{data2_norm }\CommentTok{# cut-off value 0.4}
+\NormalTok{data2_norm_}\DecValTok{1}\OperatorTok{$}\NormalTok{Y <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(}\KeywordTok{ifelse}\NormalTok{(data2_norm}\OperatorTok{$}\NormalTok{Xun }\OperatorTok{>=}\StringTok{ }\FloatTok{0.4}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)) }
+
+\NormalTok{data2_norm_}\DecValTok{2}\NormalTok{ <-}\StringTok{ }\NormalTok{data2_norm }\CommentTok{# cut-off value 0.5}
+\NormalTok{data2_norm_}\DecValTok{2}\OperatorTok{$}\NormalTok{Y <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(}\KeywordTok{ifelse}\NormalTok{(data2_norm}\OperatorTok{$}\NormalTok{Xun }\OperatorTok{>=}\StringTok{ }\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)) }
+
+\NormalTok{data2_norm_}\DecValTok{3}\NormalTok{ <-}\StringTok{ }\NormalTok{data2_norm }\CommentTok{# cut-off value 0.4}
+\NormalTok{data2_norm_}\DecValTok{3}\OperatorTok{$}\NormalTok{Y <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(}\KeywordTok{ifelse}\NormalTok{(data2_norm}\OperatorTok{$}\NormalTok{Xun }\OperatorTok{>=}\StringTok{ }\FloatTok{0.6}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)) }
+
+\CommentTok{#confusionMatrix(data2_norm_1$Y, data2_norm$Y)}
+\CommentTok{#confusionMatrix(data2_norm_2$Y, data2_norm$Y)}
+\CommentTok{#confusionMatrix(data2_norm_3$Y, data2_norm$Y)}
+\NormalTok{confusionMat <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(pred, actual)}
+\NormalTok{\{}
+\NormalTok{  TP <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(pred}\OperatorTok{$}\NormalTok{Y }\OperatorTok{==}\StringTok{ }\DecValTok{1} \OperatorTok{&}\StringTok{ }\NormalTok{actual}\OperatorTok{$}\NormalTok{Y }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{  FP <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(pred}\OperatorTok{$}\NormalTok{Y }\OperatorTok{==}\StringTok{ }\DecValTok{1} \OperatorTok{&}\StringTok{ }\NormalTok{actual}\OperatorTok{$}\NormalTok{Y }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\NormalTok{  FN <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(pred}\OperatorTok{$}\NormalTok{Y }\OperatorTok{==}\StringTok{ }\DecValTok{0} \OperatorTok{&}\StringTok{ }\NormalTok{actual}\OperatorTok{$}\NormalTok{Y }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{  TN <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(pred}\OperatorTok{$}\NormalTok{Y }\OperatorTok{==}\StringTok{ }\DecValTok{0} \OperatorTok{&}\StringTok{ }\NormalTok{actual}\OperatorTok{$}\NormalTok{Y }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{)}
+  
+\NormalTok{  confuMat <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(TP, FP, FN, TN), }\DataTypeTok{byrow =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{, }\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{)}
+\NormalTok{  confuMat_df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(confuMat, }\DataTypeTok{row.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"pred_True(1)"}\NormalTok{, }\StringTok{"pred_False(0)"}\NormalTok{))}
+  \KeywordTok{colnames}\NormalTok{(confuMat_df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"act_True(1)"}\NormalTok{, }\StringTok{"act_False(0)"}\NormalTok{)}
+  
+\NormalTok{  confuMat_df}
+  
+\NormalTok{  accur <-}\StringTok{ }\NormalTok{(TP }\OperatorTok{+}\StringTok{ }\NormalTok{TN) }\OperatorTok{/}\StringTok{ }\NormalTok{(TP }\OperatorTok{+}\StringTok{ }\NormalTok{FP }\OperatorTok{+}\StringTok{ }\NormalTok{FN }\OperatorTok{+}\StringTok{ }\NormalTok{TN)}
+\NormalTok{  sensi <-}\StringTok{ }\NormalTok{TP }\OperatorTok{/}\StringTok{ }\NormalTok{(TP }\OperatorTok{+}\StringTok{ }\NormalTok{FN)}
+\NormalTok{  speci <-}\StringTok{ }\NormalTok{TN }\OperatorTok{/}\StringTok{ }\NormalTok{(FP }\OperatorTok{+}\StringTok{ }\NormalTok{TN)}
+\NormalTok{  preci <-}\StringTok{ }\NormalTok{TP }\OperatorTok{/}\StringTok{ }\NormalTok{(TP }\OperatorTok{+}\StringTok{ }\NormalTok{FP)}
+\NormalTok{  result.list <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{ConfusionMatrix =}\NormalTok{ confuMat_df, }\DataTypeTok{Accuracy =}\NormalTok{ accur, }
+                      \DataTypeTok{Sensitivity =}\NormalTok{ sensi, }\DataTypeTok{Specificity =}\NormalTok{ speci, }
+                      \DataTypeTok{Precision =}\NormalTok{ preci) }
+  \KeywordTok{return}\NormalTok{(result.list)}
+\NormalTok{\}}
+
+\KeywordTok{confusionMat}\NormalTok{(data2_norm_}\DecValTok{1}\NormalTok{, data2_norm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $ConfusionMatrix
+##               act_True(1) act_False(0)
+## pred_True(1)            8            3
+## pred_False(0)           0            4
+## 
+## $Accuracy
+## [1] 0.8
+## 
+## $Sensitivity
+## [1] 1
+## 
+## $Specificity
+## [1] 0.5714286
+## 
+## $Precision
+## [1] 0.7272727
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{confusionMat}\NormalTok{(data2_norm_}\DecValTok{2}\NormalTok{, data2_norm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $ConfusionMatrix
+##               act_True(1) act_False(0)
+## pred_True(1)            7            2
+## pred_False(0)           1            5
+## 
+## $Accuracy
+## [1] 0.8
+## 
+## $Sensitivity
+## [1] 0.875
+## 
+## $Specificity
+## [1] 0.7142857
+## 
+## $Precision
+## [1] 0.7777778
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{confusionMat}\NormalTok{(data2_norm_}\DecValTok{3}\NormalTok{, data2_norm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $ConfusionMatrix
+##               act_True(1) act_False(0)
+## pred_True(1)            4            0
+## pred_False(0)           4            7
+## 
+## $Accuracy
+## [1] 0.7333333
+## 
+## $Sensitivity
+## [1] 0.5
+## 
+## $Specificity
+## [1] 1
+## 
+## $Precision
+## [1] 1
+\end{verbatim}
+
+
+\end{document}
