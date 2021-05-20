@@ -1,3 +1,3 @@
-# RandomBox
+# Undergraduate homework
 - 주로 학부시절 수업이나 동아리에서 구현한 거 모아놓음
 - 아무거나 다 저장하는 용도...
